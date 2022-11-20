@@ -1,2 +1,5 @@
 server:
   port: 1234
+
+feeUrl:
+  bithumb: https://www.bithumb.com/customer_support/info_fee
