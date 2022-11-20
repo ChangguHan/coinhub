@@ -3,6 +3,8 @@ package com.jango.coinhub.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -14,6 +16,21 @@ public class CommonMarketService {
         MarketService marketService = getMarketService(marketServices, market);
 
         return marketService.getCoinCurrentPrice(coin);
+    }
+    public List<String> getCommonCoin(String fromMarket, String toMarket) {
+        MarketService fromMarketService = getMarketService(marketServices, fromMarket);
+        MarketService toMarketService = getMarketService(marketServices, toMarket);
+
+        List<String> fromMarketCoins = fromMarketService.getCoins();
+        List<String> toMarketCoins = toMarketService.getCoins();
+
+        List<String> result = new ArrayList<>();
+        for (String eachCoin: fromMarketCoins) {
+            if (toMarketCoins.contains(eachCoin)) {
+                result.add(eachCoin);
+            }
+         }
+        return result;
     }
 
     public static MarketService getMarketService(Map<String, MarketService> marketServices, String market) {
