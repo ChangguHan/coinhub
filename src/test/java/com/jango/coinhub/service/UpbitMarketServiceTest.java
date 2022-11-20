@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -121,27 +122,27 @@ class UpbitMarketServiceTest {
     private List<UpbitOrderBooks> mockUpbitOrderBooks() {
         UpbitOrderBooks orderbook1 = new UpbitOrderBooks();
         orderbook1.setMarket("KRW-A");
-        orderbook1.setOrderbook_units(List.of(
-                orderbook1.new UpbitEachOrderBooks(1D, 4D, 1D, 1D),
+        orderbook1.setOrderbook_units(new ArrayList<>(List.of(
+                orderbook1.new UpbitEachOrderBooks(4D, 1D, 1D, 1D),
                 orderbook1.new UpbitEachOrderBooks(2D, 2D, 1D, 1D),
-                orderbook1.new UpbitEachOrderBooks(4D, 1D, 1D, 1D)
-        ));
+                orderbook1.new UpbitEachOrderBooks(1D, 4D, 1D, 1D)
+        )));
 
         UpbitOrderBooks orderbook2 = new UpbitOrderBooks();
         orderbook2.setMarket("KRW-B");
-        orderbook2.setOrderbook_units(List.of(
-                orderbook2.new UpbitEachOrderBooks(1D, 4D, 2D, 2D),
+        orderbook2.setOrderbook_units(new ArrayList<>(List.of(
+                orderbook2.new UpbitEachOrderBooks(4D, 1D, 2D, 2D),
                 orderbook2.new UpbitEachOrderBooks(2D, 2D, 2D, 2D),
-                orderbook2.new UpbitEachOrderBooks(4D, 1D, 2D, 2D)
-        ));
+                orderbook2.new UpbitEachOrderBooks(1D, 4D, 2D, 2D)
+                )));
 
         UpbitOrderBooks orderbook3 = new UpbitOrderBooks();
         orderbook3.setMarket("KRW-C");
-        orderbook3.setOrderbook_units(List.of(
-                orderbook3.new UpbitEachOrderBooks(1D, 4D, 3D, 3D),
+        orderbook3.setOrderbook_units(new ArrayList<>(List.of(
+                orderbook3.new UpbitEachOrderBooks(4D, 1D, 3D, 3D),
                 orderbook3.new UpbitEachOrderBooks(2D, 2D, 3D, 3D),
-                orderbook3.new UpbitEachOrderBooks(4D, 1D, 3D, 3D)
-        ));
+                orderbook3.new UpbitEachOrderBooks(1D, 4D, 3D, 3D)
+                )));
 
 
         return List.of(orderbook1, orderbook2, orderbook3);

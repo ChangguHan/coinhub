@@ -9,10 +9,7 @@ import com.jango.coinhub.model.UpbitOrderBooks;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,7 +36,7 @@ public class UpbitMarketService implements MarketService {
 
     public CoinBuyDTO calculateBuy(List<String> commonCoins, double amount) {
         Map<String, Double> amounts = new HashMap<>();
-        Map<String, Map<Double, Double>> orderBooks = new HashMap<>();
+        Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
         commonCoins.stream().map(k -> "KRW-" + k.toUpperCase()).toList();
 
         List<UpbitOrderBooks> bithumbResponse = upbitFeignClient.getOrderBooks(commonCoins);
@@ -47,9 +44,10 @@ public class UpbitMarketService implements MarketService {
             double availableCurrency = amount;
             double availableCoin = 0;
             String coin = k.getMarket().substring(4);
-            Map<Double, Double> eachOrderBook = new HashMap<>();
+            SortedMap<Double, Double> eachOrderBook = new TreeMap<>();
 
             List<UpbitOrderBooks.UpbitEachOrderBooks> eachOrderBooks = k.getOrderbook_units();
+            eachOrderBooks.sort(Comparator.comparingDouble(UpbitOrderBooks.UpbitEachOrderBooks::getAsk_price)); // ask_price 기준 오름차순,
             for(int i=0; i<eachOrderBooks.size(); i++) {
                 Double price = eachOrderBooks.get(i).getAsk_price();
                 Double quantity = eachOrderBooks.get(i).getAsk_size();
@@ -82,7 +80,7 @@ public class UpbitMarketService implements MarketService {
     public CoinSellDTO calculateSell(CoinBuyDTO buyDTO) {
         Map<String, Double> sellingAmounts = buyDTO.getAmounts();
         Map<String, Double> amounts = new HashMap<>();
-        Map<String, Map<Double, Double>> orderBooks = new HashMap<>();
+        Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
         List<String> coins = sellingAmounts.keySet().stream().map(k -> "KRW-" + k.toUpperCase()).toList();
 
         List<UpbitOrderBooks> upbitResponse = upbitFeignClient.getOrderBooks(coins);
@@ -93,8 +91,9 @@ public class UpbitMarketService implements MarketService {
             Double availableCoin = sellingAmounts.get(coin);
 
             if(availableCoin != null) {
-                Map<Double, Double> eachOrderBook = new HashMap<>();
+                SortedMap<Double, Double> eachOrderBook = new TreeMap<>();
                 List<UpbitOrderBooks.UpbitEachOrderBooks> eachOrderBooks = k.getOrderbook_units();
+                eachOrderBooks.sort(Comparator.comparingDouble(UpbitOrderBooks.UpbitEachOrderBooks::getBid_price).reversed()); // bid_price 기준 내림차순,
                 for(int i=0; i<eachOrderBooks.size(); i++) {
                     Double price = eachOrderBooks.get(i).getBid_price();
                     Double quantity = eachOrderBooks.get(i).getBid_size();

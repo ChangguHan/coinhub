@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Map;
+import java.util.SortedMap;
 
 @Getter
 @AllArgsConstructor
 public class CoinSellDTO {
     private Map<String, Double> amounts;
-    private Map<String, Map<Double, Double>> orderBooks;
+    private Map<String, SortedMap<Double, Double>> orderBooks;
 }
