@@ -16,4 +16,7 @@ public interface BithumbFeignClient {
 
     @GetMapping("/assetsstatus/ALL")
     BithumbResponse<Map<String, BithumbAssetEachStatus>> getAssetStatus();
+
+    @GetMapping("/orderbook/ALL_KRW")
+    BithumbResponse<Map<String, Object>> getOrderBook();
 }

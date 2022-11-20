@@ -2,6 +2,7 @@ package com.jango.coinhub.feign;
 
 import com.jango.coinhub.model.UpbitCoinPrice;
 import com.jango.coinhub.model.UpbitMarketCode;
+import com.jango.coinhub.model.UpbitOrderBooks;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,4 +17,6 @@ public interface UpbitFeignClient {
     @GetMapping("/market/all")
     List<UpbitMarketCode> getMarketCode();
 
+    @GetMapping("/orderbook")
+    List<UpbitOrderBooks> getOrderBooks(@RequestParam List<String> markets);
 }
