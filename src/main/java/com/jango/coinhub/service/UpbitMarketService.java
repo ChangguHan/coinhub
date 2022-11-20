@@ -37,7 +37,7 @@ public class UpbitMarketService implements MarketService {
     public CoinBuyDTO calculateBuy(List<String> commonCoins, double amount) {
         Map<String, Double> amounts = new HashMap<>();
         Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
-        commonCoins.stream().map(k -> "KRW-" + k.toUpperCase()).toList();
+        commonCoins = commonCoins.stream().map(k -> "KRW-" + k.toUpperCase()).toList();
 
         List<UpbitOrderBooks> bithumbResponse = upbitFeignClient.getOrderBooks(commonCoins);
         bithumbResponse.forEach(k -> {

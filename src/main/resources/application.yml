@@ -3,3 +3,8 @@ server:
 
 feeUrl:
   bithumb: https://www.bithumb.com/customer_support/info_fee
+
+cache:
+  ttl: #time to live
+    default: 10000 # 10s
+    withdrawalFee: 3600000 # 1h

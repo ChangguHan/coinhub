@@ -1,5 +1,6 @@
 package com.jango.coinhub.service;
 
+import com.jango.coinhub.constant.CacheConstants;
 import com.jango.coinhub.dto.CoinBuyDTO;
 import com.jango.coinhub.dto.CoinSellDTO;
 import com.jango.coinhub.feign.BithumbFeignClient;
@@ -138,7 +139,7 @@ public class BithumbMarketService implements MarketService {
         return new CoinSellDTO(amounts, orderBooks);
     }
 
-    @Cacheable("BITHUMB_CALCULATE_FEE")
+    @Cacheable(CacheConstants.BITHUMB_WITHDRAWAL_FEE)
     public Map<String /*Coin Name*/ , Double/* Withdrawal Fee */> calculateFee() throws Exception{
         Map<String, Double> result = new HashMap<>();
         Document doc = Jsoup.connect(feeUrl).timeout(60000).get();
