@@ -50,7 +50,10 @@ public class BithumbMarketService implements MarketService {
 
         // orderbook for 돌면
         bithumbResponse.forEach((k, v) -> { // key: coin, v: object
-            if(!(k.equalsIgnoreCase("timestamp") || k.equalsIgnoreCase("payment_currency"))) {
+            if(!(k.equalsIgnoreCase("timestamp") || k.equalsIgnoreCase("payment_currency"))
+                    && commonCoins.contains(k)
+            ) {
+
                 double availableCurrency = amount;
                 double availableCoin = 0;
 
@@ -91,8 +94,7 @@ public class BithumbMarketService implements MarketService {
         return new CoinBuyDTO(amounts, orderBooks);
     }
 
-    public CoinSellDTO calculateSell(CoinBuyDTO buyDTO) {
-        Map<String, Double> sellingAmounts = buyDTO.getAmounts();
+    public CoinSellDTO calculateSell(Map<String, Double> sellingAmounts) {
         Map<String, Double> amounts = new HashMap<>();
         Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
 

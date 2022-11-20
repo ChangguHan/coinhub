@@ -96,7 +96,7 @@ class UpbitMarketServiceTest {
         when(upbitFeignClient.getOrderBooks(commonCoins)).thenReturn(mockOrderBook);
 
         // when
-        CoinSellDTO result = upbitMarketService.calculateSell(new CoinBuyDTO(amounts, null));
+        CoinSellDTO result = upbitMarketService.calculateSell(amounts);
 
         // then
         assertEquals(4*1 + 2*1 + 1*0.5, result.getAmounts().get("A"));
@@ -123,25 +123,25 @@ class UpbitMarketServiceTest {
         UpbitOrderBooks orderbook1 = new UpbitOrderBooks();
         orderbook1.setMarket("KRW-A");
         orderbook1.setOrderbook_units(new ArrayList<>(List.of(
-                orderbook1.new UpbitEachOrderBooks(4D, 1D, 1D, 1D),
-                orderbook1.new UpbitEachOrderBooks(2D, 2D, 1D, 1D),
-                orderbook1.new UpbitEachOrderBooks(1D, 4D, 1D, 1D)
+                new UpbitOrderBooks.UpbitEachOrderBooks(4D, 1D, 1D, 1D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(2D, 2D, 1D, 1D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(1D, 4D, 1D, 1D)
         )));
 
         UpbitOrderBooks orderbook2 = new UpbitOrderBooks();
         orderbook2.setMarket("KRW-B");
         orderbook2.setOrderbook_units(new ArrayList<>(List.of(
-                orderbook2.new UpbitEachOrderBooks(4D, 1D, 2D, 2D),
-                orderbook2.new UpbitEachOrderBooks(2D, 2D, 2D, 2D),
-                orderbook2.new UpbitEachOrderBooks(1D, 4D, 2D, 2D)
+                new UpbitOrderBooks.UpbitEachOrderBooks(4D, 1D, 2D, 2D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(2D, 2D, 2D, 2D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(1D, 4D, 2D, 2D)
                 )));
 
         UpbitOrderBooks orderbook3 = new UpbitOrderBooks();
         orderbook3.setMarket("KRW-C");
         orderbook3.setOrderbook_units(new ArrayList<>(List.of(
-                orderbook3.new UpbitEachOrderBooks(4D, 1D, 3D, 3D),
-                orderbook3.new UpbitEachOrderBooks(2D, 2D, 3D, 3D),
-                orderbook3.new UpbitEachOrderBooks(1D, 4D, 3D, 3D)
+                new UpbitOrderBooks.UpbitEachOrderBooks(4D, 1D, 3D, 3D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(2D, 2D, 3D, 3D),
+                new UpbitOrderBooks.UpbitEachOrderBooks(1D, 4D, 3D, 3D)
                 )));
 
 

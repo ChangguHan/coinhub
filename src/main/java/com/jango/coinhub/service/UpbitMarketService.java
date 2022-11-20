@@ -77,8 +77,7 @@ public class UpbitMarketService implements MarketService {
         return new CoinBuyDTO(amounts, orderBooks);
     }
 
-    public CoinSellDTO calculateSell(CoinBuyDTO buyDTO) {
-        Map<String, Double> sellingAmounts = buyDTO.getAmounts();
+    public CoinSellDTO calculateSell(Map<String, Double> sellingAmounts) {
         Map<String, Double> amounts = new HashMap<>();
         Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
         List<String> coins = sellingAmounts.keySet().stream().map(k -> "KRW-" + k.toUpperCase()).toList();
@@ -91,7 +90,7 @@ public class UpbitMarketService implements MarketService {
             Double availableCoin = sellingAmounts.get(coin);
 
             if(availableCoin != null) {
-                SortedMap<Double, Double> eachOrderBook = new TreeMap<>();
+                SortedMap<Double, Double> eachOrderBook = new TreeMap<>(Comparator.reverseOrder());
                 List<UpbitOrderBooks.UpbitEachOrderBooks> eachOrderBooks = k.getOrderbook_units();
                 eachOrderBooks.sort(Comparator.comparingDouble(UpbitOrderBooks.UpbitEachOrderBooks::getBid_price).reversed()); // bid_price 기준 내림차순,
                 for(int i=0; i<eachOrderBooks.size(); i++) {

@@ -18,7 +18,7 @@ public class UpbitOrderBooks {
     @Getter
     @Setter
     @AllArgsConstructor
-    public class UpbitEachOrderBooks {
+    public static class UpbitEachOrderBooks {
         private double ask_price;
         private double bid_price;
         private double ask_size;

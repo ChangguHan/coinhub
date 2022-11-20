@@ -80,10 +80,6 @@ class BithumbMarketServiceTest {
         assertEquals(2+1.5, result.getAmounts().get("B"));
         assertEquals(2, result.getOrderBooks().get("B").get(1D));
         assertEquals(1.5, result.getOrderBooks().get("B").get(2D));
-
-        assertEquals(3+1, result.getAmounts().get("C"));
-        assertEquals(3, result.getOrderBooks().get("C").get(1D));
-        assertEquals(1, result.getOrderBooks().get("C").get(2D));
     }
 
     @Test
@@ -94,7 +90,7 @@ class BithumbMarketServiceTest {
         when(bithumbFeignClient.getOrderBook()).thenReturn(mockOrderBook);
 
         // when
-        CoinSellDTO result = bithumbMarketService.calculateSell(new CoinBuyDTO(amounts, null));
+        CoinSellDTO result = bithumbMarketService.calculateSell(amounts);
 
         // then
         assertEquals(4*1 + 2*1 + 1*0.5, result.getAmounts().get("A"));
