@@ -32,8 +32,4 @@ public class MarketController {
     public List<String> getCommonCoins(@RequestParam String market1, @RequestParam String market2) {
         return commonMarketService.getCommonCoin(market1, market2);
     }
-
-
-
-
 }

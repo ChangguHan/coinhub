@@ -15,7 +15,7 @@ public class TransferCalculateController {
     private final TransferCalculateService transferCalculateService;
 
     @GetMapping("/transfer-calculate")
-    public List<TransferCalculateResponseView> getPrice (
+    public List<TransferCalculateResponseView> transferCalculate (
             @RequestParam String fromMarket,
             @RequestParam String toMarket,
             @RequestParam double amount

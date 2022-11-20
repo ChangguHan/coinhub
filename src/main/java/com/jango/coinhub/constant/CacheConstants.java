@@ -1,6 +1,7 @@
 package com.jango.coinhub.constant;
 
 public class CacheConstants {
+    private CacheConstants() { }
     // Bithumb
     public static final String BITHUMB_COIN_PRICE = "BITHUMB_COIN_PRICE";
     public static final String BITHUMB_ASSET_STATUS = "BITHUMB_ASSET_STATUS";

@@ -17,6 +17,7 @@ public class CacheEvictConfig {
     , allEntries = true)
     @Scheduled(fixedRateString = "${cache.ttl.default}")
     public void emptyDefaultCache() {
+        // to cache evict
     }
 
     @CacheEvict(
@@ -25,5 +26,6 @@ public class CacheEvictConfig {
             allEntries = true)
     @Scheduled(fixedRateString = "${cache.ttl.withdrawalFee}")
     public void emptyWithdrawalFeeCache() {
+        // to cache evict
     }
 }

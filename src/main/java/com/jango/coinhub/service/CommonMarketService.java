@@ -34,9 +34,9 @@ public class CommonMarketService {
     }
 
     public static MarketService getMarketService(Map<String, MarketService> marketServices, String market) {
-        for(String key : marketServices.keySet()) {
-            if(key.substring(0, market.length()).equals(market.toLowerCase())) {
-                return marketServices.get(key);
+        for(Map.Entry<String, MarketService> entry : marketServices.entrySet()) {
+            if(entry.getKey().substring(0, market.length()).equals(market.toLowerCase())) {
+                return entry.getValue();
             }
         }
         return null;

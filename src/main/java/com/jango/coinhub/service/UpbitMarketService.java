@@ -48,14 +48,14 @@ public class UpbitMarketService implements MarketService {
 
             List<UpbitOrderBooks.UpbitEachOrderBooks> eachOrderBooks = k.getOrderbook_units();
             eachOrderBooks.sort(Comparator.comparingDouble(UpbitOrderBooks.UpbitEachOrderBooks::getAsk_price)); // ask_price 기준 오름차순,
-            for(int i=0; i<eachOrderBooks.size(); i++) {
-                Double price = eachOrderBooks.get(i).getAsk_price();
-                Double quantity = eachOrderBooks.get(i).getAsk_size();
-                Double eachTotalPrice = price * quantity;
-                double buyableCoinAmount = availableCurrency/price;
+            for (UpbitOrderBooks.UpbitEachOrderBooks orderBook : eachOrderBooks) {
+                Double price = orderBook.getAsk_price();
+                Double quantity = orderBook.getAsk_size();
+                double eachTotalPrice = price * quantity;
+                double buyableCoinAmount = availableCurrency / price;
 
                 // 만약 가격 넘으면 다음스텝,아니면 끝내기
-                if(eachTotalPrice >= availableCurrency) { // 못넘어갈경우
+                if (eachTotalPrice >= availableCurrency) { // 못넘어갈경우
                     availableCoin += buyableCoinAmount;
                     eachOrderBook.put(price, buyableCoinAmount);
                     availableCurrency = 0;
@@ -93,13 +93,13 @@ public class UpbitMarketService implements MarketService {
                 SortedMap<Double, Double> eachOrderBook = new TreeMap<>(Comparator.reverseOrder());
                 List<UpbitOrderBooks.UpbitEachOrderBooks> eachOrderBooks = k.getOrderbook_units();
                 eachOrderBooks.sort(Comparator.comparingDouble(UpbitOrderBooks.UpbitEachOrderBooks::getBid_price).reversed()); // bid_price 기준 내림차순,
-                for(int i=0; i<eachOrderBooks.size(); i++) {
-                    Double price = eachOrderBooks.get(i).getBid_price();
-                    Double quantity = eachOrderBooks.get(i).getBid_size();
-                    Double eachTotalPrice = price * quantity;
+                for (UpbitOrderBooks.UpbitEachOrderBooks orderBook : eachOrderBooks) {
+                    Double price = orderBook.getBid_price();
+                    Double quantity = orderBook.getBid_size();
+                    double eachTotalPrice = price * quantity;
 
                     // 만약 코인 양 더 많으면 끝내기
-                    if(quantity >= availableCoin) { // 못넘어갈경우
+                    if (quantity >= availableCoin) { // 못넘어갈경우
                         sellCurrency += price * availableCoin;
                         eachOrderBook.put(price, availableCoin);
                         availableCoin = 0D;
@@ -129,6 +129,4 @@ public class UpbitMarketService implements MarketService {
                         UpbitEachWithdrawalFee::getWithdrawFee
                 ));
     }
-
-
 }

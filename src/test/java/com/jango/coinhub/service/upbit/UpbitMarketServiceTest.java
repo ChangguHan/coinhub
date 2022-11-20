@@ -69,7 +69,7 @@ class UpbitMarketServiceTest {
         // given
         List<String> commonCoins = List.of("A", "B");
         List<UpbitOrderBooks> mockOrderBook = mockUpbitOrderBooks();
-        when(upbitFeignClient.getOrderBooks(commonCoins)).thenReturn(mockOrderBook);
+        when(upbitFeignClient.getOrderBooks(List.of("KRW-A", "KRW-B"))).thenReturn(mockOrderBook);
 
         // when
         CoinBuyDTO result = upbitMarketService.calculateBuy(commonCoins, 5);
