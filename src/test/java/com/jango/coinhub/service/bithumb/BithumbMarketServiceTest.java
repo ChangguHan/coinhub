@@ -1,4 +1,4 @@
-package com.jango.coinhub.service;
+package com.jango.coinhub.service.bithumb;
 
 import com.jango.coinhub.dto.CoinBuyDTO;
 import com.jango.coinhub.dto.CoinSellDTO;
@@ -6,6 +6,7 @@ import com.jango.coinhub.feign.BithumbFeignClient;
 import com.jango.coinhub.feign.response.BithumbResponse;
 import com.jango.coinhub.model.BithumbAssetEachStatus;
 import com.jango.coinhub.model.BithumbCoinPrice;
+import com.jango.coinhub.service.BithumbMarketService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

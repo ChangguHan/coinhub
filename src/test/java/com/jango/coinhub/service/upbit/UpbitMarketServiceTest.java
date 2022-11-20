@@ -1,4 +1,4 @@
-package com.jango.coinhub.service;
+package com.jango.coinhub.service.upbit;
 
 import com.jango.coinhub.dto.CoinBuyDTO;
 import com.jango.coinhub.dto.CoinSellDTO;
@@ -6,6 +6,7 @@ import com.jango.coinhub.feign.UpbitFeignClient;
 import com.jango.coinhub.model.UpbitCoinPrice;
 import com.jango.coinhub.model.UpbitMarketCode;
 import com.jango.coinhub.model.UpbitOrderBooks;
+import com.jango.coinhub.service.UpbitMarketService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

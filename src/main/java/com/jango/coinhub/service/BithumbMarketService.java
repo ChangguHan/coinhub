@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -137,6 +138,7 @@ public class BithumbMarketService implements MarketService {
         return new CoinSellDTO(amounts, orderBooks);
     }
 
+    @Cacheable("BITHUMB_CALCULATE_FEE")
     public Map<String /*Coin Name*/ , Double/* Withdrawal Fee */> calculateFee() throws Exception{
         Map<String, Double> result = new HashMap<>();
         Document doc = Jsoup.connect(feeUrl).timeout(60000).get();
